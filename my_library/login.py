@@ -102,6 +102,9 @@ def new_login():
 
     print('\n암호를 입력해주세요.(나가기: Q)')   
     user.password = sys.stdin.readline().strip().replace(" ","")  
+    if  user.password.upper() == 'Q':
+        print('\n회원가입 화면을 나갑니다.') 
+        action_chk()  
 
     while len(user.password.replace(" ","")) <= 0:
         print('\n암호는 필수 입력 사항입니다. 다시 입력해주세요.(나가기: Q)')   
@@ -112,6 +115,9 @@ def new_login():
 
     print('\n이름을 입력해주세요.(나가기: Q)')   
     user.name = sys.stdin.readline().strip().replace(" ","")  
+    if  user.name.upper() == 'Q':
+        print('\n회원가입 화면을 나갑니다.') 
+        action_chk()  
 
     while len(user.name.replace(" ","")) <= 0:
         print('\n이름은 필수 입력 사항입니다. 다시 입력해주세요.(나가기: Q)')       
