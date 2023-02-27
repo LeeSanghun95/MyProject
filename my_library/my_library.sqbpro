@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/git/practice/my_library.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2777"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="3" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,11:mainrental_list"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="cart_list" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="119"/><column index="2" value="96"/><column index="3" value="334"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="cheomdan_list" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="96"/><column index="2" value="68"/><column index="3" value="83"/><column index="4" value="121"/><column index="5" value="300"/><column index="6" value="300"/><column index="7" value="246"/><column index="9" value="150"/><column index="10" value="111"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="jangdeok_list" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="94"/><column index="2" value="68"/><column index="3" value="83"/><column index="4" value="122"/><column index="5" value="300"/><column index="6" value="300"/><column index="7" value="168"/><column index="9" value="190"/><column index="10" value="111"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="rental_list" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="26"/><column index="2" value="63"/><column index="3" value="88"/><column index="4" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="singa_list" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="152"/><column index="2" value="68"/><column index="3" value="83"/><column index="4" value="148"/><column index="5" value="300"/><column index="6" value="300"/><column index="7" value="300"/><column index="9" value="148"/><column index="10" value="111"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sqlite_sequence" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="47"/><column index="2" value="35"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="user_info" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="47"/><column index="2" value="79"/><column index="3" value="47"/><column index="4" value="91"/><column index="5" value="79"/><column index="6" value="59"/><column index="7" value="46"/><column index="8" value="68"/><column index="9" value="76"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">select ROW_NUMBER() OVER (ORDER BY (select null)) as no
+, D.*
+FROM (
+	select  A.* 
+	from (
+		select
+		book_id, library_nm, info_nm, 
+		substr(book_nm,1,30) as book_nm, 
+		substr(author_nm,1,30) as author_nm
+		from jangdeok_list 
+		where (book_nm like '설민%' or author_nm like '%설민%')
+		ORDER BY book_no LIMIT 5
+		) A
+union
+	select  B.* 
+	from (
+		select 
+		book_id, library_nm, info_nm, 
+		substr(book_nm,1,30) as book_nm, 
+		substr(author_nm,1,30) as author_nm
+		from cheomdan_list 
+		where (book_nm like '설민%' or author_nm like '%설민%')
+		ORDER BY book_no LIMIT 5	
+		) B
+union		
+	select  C.* 
+	from (
+		select 
+		book_id, library_nm, info_nm, 
+		substr(book_nm,1,30) as book_nm, 
+		substr(author_nm,1,30) as author_nm
+		from singa_list 
+		where (book_nm like '설민%' or author_nm like '%설민%')
+		ORDER BY book_no LIMIT 5			
+		) C 
+) D</sql><sql name="SQL 1 (1)">select ROW_NUMBER() OVER (ORDER BY (select null)) as no,
+book_id, book_nm, author_nm, library_nm, info_nm, cart_date
+from cart_list
+where id = 'lsh'</sql><sql name="SQL 1 (2)">--delete from rental_list where id = 'lsh'
+
+
+select *
+from rental_list</sql><current_tab id="1"/></tab_sql></sqlb_project>
